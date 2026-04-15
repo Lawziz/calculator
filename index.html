@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-startup-image" href="icon-512.png">
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+    }
+    </script>
+</head>
+<body>
+    <div id="calculator">
+        <div id="screen">
+            <div id="history-container">
+                <ul id="history-display"></ul>
+            </div>
+            <input id="display" readonly>
+        </div>
+        <div id="keys">
+            <button id="btnX" onclick="clearOneDisplay()" class="major-btn"><i class="fas fa-delete-left"></i></button>
+            <button id="btnAC" onclick="clearAllDisplay()" class="major-btn">AC</button>
+            <button id="btn-percent" onclick="percentDisplay()" class="major-btn">%</button>
+            <button id="btn-div" onclick="appendToDisplay('/')" class="operator-btn">/</button>
+            <button id="btn7" onclick="appendToDisplay('7')">7</button>
+            <button id="btn8" onclick="appendToDisplay('8')">8</button>
+            <button id="btn9" onclick="appendToDisplay('9')">9</button>
+            <button id="btn-mult" onclick="appendToDisplay('*')" class="operator-btn">*</button>
+            <button id="btn4" onclick="appendToDisplay('4')">4</button>
+            <button id="btn5" onclick="appendToDisplay('5')">5</button>
+            <button id="btn6" onclick="appendToDisplay('6')">6</button>
+            <button id="btn-minus" onclick="appendToDisplay('-')" class="operator-btn">-</button>
+            <button id="btn1" onclick="appendToDisplay('1')">1</button>
+            <button id="btn2" onclick="appendToDisplay('2')">2</button>
+            <button id="btn3" onclick="appendToDisplay('3')">3</button>
+            <button id="btn-plus" onclick="appendToDisplay('+')" class="operator-btn">+</button>
+            <button id="btn-dot" onclick="appendToDisplay('.')">.</button>
+            <button id="btn0" onclick="appendToDisplay('0')">0</button>
+            <button id="btn00" onclick="appendToDisplay('00')">00</button>
+            <button id="btn-equals" onclick="calculate()" class="operator-btn">=</button>
+        </div>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+
+#btn7 { grid-area: btn7; }
+#btn8 { grid-area: btn8; }
+#btn9 { grid-area: btn9; }
+#btnX { grid-area: btnX; }
+#btn-div { grid-area: btn-div; }
+#btn4 { grid-area: btn4; }
+#btn5 { grid-area: btn5; }
+#btn6 { grid-area: btn6; }
+#btnAC { grid-area: btnAC; }
+#btn-mult { grid-area: btn-mult; }
+#btn1 { grid-area: btn1; }
+#btn2 { grid-area: btn2; }
+#btn3 { grid-area: btn3; }
+#btn-percent { grid-area: btn-percent; }
+#btn-minus { grid-area: btn-minus; }
+#btn00 { grid-area: btn00; }
+#btn0 { grid-area: btn0; }
+#btn-dot { grid-area: btn-dot; }
+#btn-equals { grid-area: btn-equals; }
+#btn-plus { grid-area: btn-plus; }
+
+
+
+:root {
+    --bg-main: hsl(0, 0%, 1.5%);
+    --bg-display: hsla(0, 0%, 20%);
+    --btn-num: hsla(0, 0%, 100%, 0.15);
+    --btn-op: hsl(35, 100%, 55%);
+    --btn-op-hover: hsl(35, 100%, 65%);
+    --btn-major: hsla(0, 0%, 100%, 0.35);
+    --btn-active: hsla(0, 0%, 50%, 1);
+    --text-white: white;
+    --btn-hover: hsla(0, 0%, 40%, 1); 
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh; /* Better for mobile browsers */
+    background-color: hsla(0, 0%, 80%);
+    transition: background-color 0.3s;
+}
+
+#calculator {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-main);
+    border-radius: 30px;
+    width: 100%; /* Important: allows it to be fluid */
+    max-width: 365px;
+    overflow: hidden;
+    border: none;
+    margin-top: 20px;
+}
+
+#screen {
+    background-color: var(--bg-display);
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 140px;
+}
+
+#display {
+    border: none;
+    color: var(--text-white);
+    width: 100%;
+    height: 60px;
+    padding: 0 10px;
+    font-size: 40px;
+    background-color: transparent;
+    text-align: right;
+    box-sizing: border-box;
+    transition: font-size 0.15s ease-in-out;
+    outline: none;  
+}
+
+.font-medium{ font-size: 28px !important; }
+
+.font-small{ font-size: 20px !important; }
+
+#keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "btnX btnAC btn-percent btn-div"
+        "btn7 btn8 btn9 btn-mult"
+        "btn4 btn5 btn6 btn-minus"
+        "btn1 btn2 btn3 btn-plus"
+        "btn-dot btn0 btn00 btn-equals";
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+    gap: 12px;
+}
+
+button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* Perfect circles */
+    border: none;
+    background-color: var(--btn-num);
+    color: var(--text-white);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:hover { 
+    background-color: var(--btn-hover);
+
+}
+button:active { 
+    background-color: var(--btn-active); 
+    transform: scale(1.05);
+    opacity: 0.9;
+    transition: 0s ease-in-out;
+}
+button:focus,
+button:focus-visible {
+    outline: none;
+}
+
+.operator-btn { 
+    background-color: var(--btn-op);
+    box-shadow: 0 0 10px rgba(255, 159, 10, 0.2); 
+}
+.operator-btn:hover { background-color: var(--btn-op-hover); }
+
+.major-btn { background-color: var(--btn-major); }
+
+#history-display li {
+        font-size: 0.9rem;
+        text-align: right; /* Ensures it stays on the right */
+        width: 95%;       /* Spans full width to allow right alignment */
+        list-style: none;
+        color: var(--btn-major);
+        opacity: 0.8;
+
+    }
+
+@media (max-width: 400px) {
+    body {
+        height: 100dvh; /* Force the body to the exact screen height */
+        overflow: hidden;
+        background-color: var(--bg-main); /* Prevent the page from bouncing/scrolling */
+    }
+
+    #calculator {
+        width: 100%;    /* Fill the full width */
+        height: 100dvh; /* Fill the full height */
+        max-width: none;
+        margin-top: 0;   /* Remove the top margin */
+        border-radius: 0; /* Optional: Remove rounded corners for a "true" app feel */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Space out the screen and keys */
+        align-items: center;
+    }
+
+    /* THE MAGIC: Flex-grow makes the glass part fill the extra space */
+    #screen {
+        flex-grow: 1; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Keeps the numbers at the bottom */
+        padding: 20px 0;
+        background-color: var(--bg-main);
+        width: 100%;
+        padding-top: env(safe-area-inset-top, 20px);
+    }
+
+    #display {
+        font-size: 45px; /* Make the numbers big since we have room */
+        height: auto;
+        margin-bottom: 10px;
+        background-color: transparent;
+        min-height: 80px;
+        display: block;
+        width: 100%;
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    #history-container {
+        flex-grow: 1; /* Let the history expand as well */
+        max-height: 40%; /* But don't let it take more than 40% of the screen */
+    }
+
+    #keys {
+        display: grid;
+        padding: 15px;
+        gap: 8px;
+        width: 100%;
+        justify-items: center;
+        align-content: end;
+        padding-bottom: env(safe-area-inset-bottom, 20px); /* Avoid the iPhone home bar */
+        flex-shrink: 0; /* Don't let the keys get squished */
+
+      
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "btnX btnAC btn-percent btn-div"
+        "btn7 btn8 btn9 btn-mult"
+        "btn4 btn5 btn6 btn-minus"
+        "btn1 btn2 btn3 btn-plus"
+        "btn-dot btn0 btn00 btn-equals";
+        align-items: center;
+   
+    
+}
+
+    button {
+    width: 21vw;      /* Scales based on screen width */
+    max-width: 75px;  /* Keeps them from getting huge */
+    aspect-ratio: 1;  /* Force height to match width */
+    height: auto;     /* Overwrite the 70px from desktop */
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, transform 0.2s, opacity 0.2s;
+    }
+    button:active { 
+        background-color: var(--btn-active); 
+        transform: scale(1.15);
+        opacity: 0.9;
+        transition: 0s;
+    
+    }
+
+
+}
+
+/* --- Landscape Mode: Stacked 5-Column --- */
+@media (max-width: 950px) and (orientation: landscape) {
+    body {
+        background-color: var(--bg-main);
+        margin: 0;
+        width: 100dvw; /* Ensure it fills the width in landscape */
+        height: 100dvh;
+        overflow: hidden;
+    }
+
+    #calculator {
+        width: 95%;
+        height: 100dvh;
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column; /* Keeps screen on top of keys */
+    }
+
+    #screen {
+        padding: 10px 20px;
+        flex-direction: column;
+        display: flex;
+        justify-content:center;
+        flex-grow: 1; /* Takes up remaining top space */
+        min-height: 60px; /* Reduced to ensure keys fit */
+        padding: 10px 20px;
+        background-color: var(--bg-main);
+    }
+
+    #display {
+        font-size: 35px; /* Smaller font to save vertical space */
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    #history-container {
+        max-height: 30%;
+        text-align: left;
+        display: flex;
+        justify-content: flex-start;
+
+    }
+
+
+    button {
+        width: 90% !important;      /* Fill the 5-column grid cells */
+        height: 40px !important;   /* Fixed height to prevent vertical overflow */
+        border-radius: 50px !important; /* Ovals/Pills look better in landscape */
+        font-size: 1.2rem;
+        aspect-ratio: auto !important; /* Disable circle aspect to fit the grid */
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        transition: background-color 0.2s, transform 1.1s, opacity 0.2s;
+    }
+    
+    button:active {
+        transform: scale(1); /* Keep the magical pop */
+        opacity: 0.6; /* Slightly less opaque on press */
+        background-color: var(--btn-active); 
+        transform: scale(1.1);
+        transition: 0s;
+    
+    }
+
+ #keys {
+        width: 95%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: repeat(5, 1fr); /* Your 5 columns */
+        gap: 8px;      /* Tighter gaps for short screens */
+        padding: 20px;
+        padding-bottom: env(safe-area-inset-bottom, 15px);
+        background-color: var(--bg-main);
+        flex-shrink: 0; /* Prevents keys from squishing */
+
+        grid-template-areas:
+            "btn7  btn8  btn9  btnX   btn-div"
+            "btn4  btn5  btn6  btnAC  btn-mult"
+            "btn1  btn2  btn3  btn-percent   btn-minus"
+            "btn00  btn0   btn-dot btn-equals    btn-plus";
+    }
+
+
+}
